@@ -1,0 +1,54 @@
+cabal-version:      3.0
+name:               awsspendsummary
+version:            0.1.0.0
+synopsis:
+    Extract recent daily AWS costs
+description:
+        Please see the README on GitHub at <https://github.com/danielrolls/aws-spend-summary>
+license:            GPL-2.0-only
+license-file:       LICENSE
+author:             Daniel Rolls
+maintainer:         daniel.rolls.27@googlemail.com
+copyright: (c) 2024 Daniel Rolls
+category:           AWS
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common deps
+    default-language: GHC2021
+    ghc-options: -Wall
+    default-extensions:
+        ScopedTypeVariables
+      , OverloadedStrings
+
+library
+    import:           deps
+    build-depends:
+        base ^>=4.18.2.1
+      , amazonka
+      , amazonka-core
+      , amazonka-s3
+      , ansi-terminal
+      , bytestring
+      , cassava
+      , conduit
+      , containers
+      , lens
+      , text
+      , time
+      , timelens
+      , vector
+      , zlib
+    exposed-modules:  AwsSpendSummary
+    hs-source-dirs:   src
+
+executable awsspendsummary
+    import:           deps
+    main-is:          Main.hs
+    build-depends:
+        base ^>=4.18.2.1
+      , awsspendsummary
+      , text
+      , optparse-applicative
+    hs-source-dirs:   app
+
