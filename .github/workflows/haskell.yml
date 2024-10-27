@@ -13,33 +13,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-haskell@v1
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v20
       with:
-        ghc-version: '9.6.5'
-        cabal-version: '3.10'
-
-    - name: Cache
-      uses: actions/cache@v3
-      env:
-        cache-name: cache-cabal
-      with:
-        path: ~/.cabal
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/*.cabal') }}-${{ hashFiles('**/cabal.project') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
-
-    - name: Install dependencies
-      run: |
-        cabal update
-        cabal build --only-dependencies --enable-tests --enable-benchmarks
-    - name: Build
-      run: cabal build --enable-tests --enable-benchmarks all
-    - name: Run tests
-      run: cabal test all
-    - name: Build a distribution
-      run: cabal sdist
+        nix_path: nixpkgs=channel:nixos-unstable
+    - run: nix develop
+    - run: cabal v2-update
+    - run: cabal v2-test
+    - run: cabal sdist
