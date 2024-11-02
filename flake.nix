@@ -8,7 +8,7 @@
     let pkgs = nixpkgs.legacyPackages.x86_64-linux;
     in {
 
-      packages.x86_64-linux.default = (pkgs.haskell.lib.overrideCabal (
+      packages.x86_64-linux.default = (
 
         pkgs.haskellPackages.developPackage {
             root = ./.;
@@ -18,10 +18,7 @@
                   hlint
                   haskell-language-server
                 ]);
-              }
-      ) {
-
-      }).overrideAttrs(old: {
+        }).overrideAttrs(old: {
         buildInputs = old.buildInputs ++ [ pkgs.zlib ];
       });
     };
