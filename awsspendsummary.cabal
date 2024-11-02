@@ -9,7 +9,7 @@ license:            GPL-2.0-only
 license-file:       LICENSE
 author:             Daniel Rolls
 maintainer:         daniel.rolls.27@googlemail.com
-copyright: (c) 2024 Daniel Rolls
+copyright:          (c) 2024 Daniel Rolls
 category:           AWS
 build-type:         Simple
 extra-doc-files:    CHANGELOG.md
@@ -17,6 +17,9 @@ extra-doc-files:    CHANGELOG.md
 common deps
     default-language: GHC2021
     ghc-options: -Wall
+    build-depends:
+        data-default
+      , text
     default-extensions:
         ScopedTypeVariables
       , OverloadedStrings
@@ -33,8 +36,8 @@ library
       , cassava
       , conduit
       , containers
+      , http-types
       , lens
-      , text
       , time
       , timelens
       , vector
@@ -48,7 +51,6 @@ executable awsspendsummary
     build-depends:
         base ^>=4.18.2.1
       , awsspendsummary
-      , text
       , optparse-applicative
     hs-source-dirs:   app
 
