@@ -1,0 +1,27 @@
+name: Haskell CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - run: sudo apt-get update
+    - run: sudo apt-get install libghc-zlib-dev  libghc-zlib-bindings-dev
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v20
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - run: nix develop --command cabal v2-update
+    - run: nix develop --command cabal v2-build
+    - run: nix develop --command cabal v2-test
+    - run: nix develop --command cabal sdist
+

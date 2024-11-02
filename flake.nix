@@ -1,14 +1,14 @@
 {
   description = "awsspendsummary";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
   outputs = { self, nixpkgs }:
 
     let pkgs = nixpkgs.legacyPackages.x86_64-linux;
     in {
 
-      packages.x86_64-linux.default =
+      packages.x86_64-linux.default = (
 
         pkgs.haskellPackages.developPackage {
             root = ./.;
@@ -18,7 +18,9 @@
                   hlint
                   haskell-language-server
                 ]);
-        };
+        }).overrideAttrs(old: {
+        buildInputs = old.buildInputs ++ [ pkgs.zlib ];
+      });
     };
 }
 
