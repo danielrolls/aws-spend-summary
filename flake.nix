@@ -1,5 +1,5 @@
 {
-  description = "awsspendsummary";
+  description = "AWS-Spend-Summary";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
