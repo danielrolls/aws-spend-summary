@@ -1,5 +1,7 @@
 # AWS Spend Summary Tool
 
+[![Hackage](https://img.shields.io/badge/hackage-awsspendsummary-brightgreen.svg)](http://hackage.haskell.org/package/awsspendsummary)
+
 This tool prints your recent, daily AWS cost usage to the command line to save logging in to the console to check it.
 
 Credentials are read from `~/.aws/credentials` and account details from 
