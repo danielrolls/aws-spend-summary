@@ -122,12 +122,11 @@ getCostsFromAWS debugFile bucketName pathPrefix costReportName startTime = runRe
              return . extractCostData $ rawCsv
     )
     where mnthStr = formatTime defaultTimeLocale "%B" startTime
-          billingPeriod = formatTime defaultTimeLocale "%_Y-%m" startTime
-          fullPath = pathPrefix
-                  <> "/" <> costReportName
-                  <> "/data"
-                  <> "/BILLING_PERIOD=" <> pack billingPeriod
-                  <> "/" <> costReportName <> "-00001.csv.gz"
+          fullPath = pathPrefix <> "/" <> costReportName <> "/data"
+                                <> pack (formatTime defaultTimeLocale
+                                                    "/BILLING_PERIOD=%_Y-%m/"
+                                                    startTime)
+                                <> costReportName <> "-00001.csv.gz"
           handleJust = maybe (return ())
 
 extractCostData :: LBS.ByteString -> Vector Cost
