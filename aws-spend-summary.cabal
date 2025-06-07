@@ -1,6 +1,6 @@
 cabal-version:      3.0
 name:               aws-spend-summary
-version:            0.2.0.2
+version:            0.2.0.3
 synopsis:
     Extract recent daily AWS costs
 description:
@@ -53,6 +53,6 @@ executable aws-spend-summary
     build-depends:
         base >=4.18.1.0 && <4.21
       , aws-spend-summary
-      , optparse-applicative >=0.18.1.0 && < 0.19
+      , optparse-applicative >=0.18.1.0 && < 0.20
     hs-source-dirs:   app
 
