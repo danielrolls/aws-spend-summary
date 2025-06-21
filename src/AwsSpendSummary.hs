@@ -12,7 +12,7 @@ import Prelude hiding (concat)
 import Amazonka.Data.Body (_ResponseBody)
 import Amazonka.S3.GetObject (newGetObject, getObjectResponse_body)
 import Amazonka.S3.Internal (BucketName(..), ObjectKey(..))
-import Amazonka (_ServiceError, discover, newEnv, serviceError_status, sendEither)
+import Amazonka (ErrorCode(ErrorCode), _ServiceError, discover, newEnv, serviceError_code, serviceError_status, sendEither)
 import Codec.Compression.GZip (decompress)
 import Conduit ((.|), foldC, liftIO, runConduit, runResourceT)
 import Control.Lens ((^.), (^?), over, set)
@@ -109,9 +109,14 @@ getCostsFromAWS debugFile bucketName pathPrefix costReportName startTime = runRe
                                      <> "results for " <> mnthStr
                                      <> " which might be because "
                                      <> "no report exists for this month yet."
-                 _ -> error $
-                         "Could not retrieve results from: " <> show fullPath
-                      <> "\n" <> show e
+                 _ -> case e ^? _ServiceError . serviceError_code of
+                       Just (ErrorCode "AccessDenied") ->
+                           error $ "Access denied to bucket: "
+                                   <> unpack bucketName
+                                   <> ". Please check your permissions and that the bucket exists."
+                       _ -> error $
+                           "Could not retrieve results from: " <> show fullPath
+                        <> "\n" <> show e
              return Data.Vector.empty
          Right res -> do
              rawCsv <- decompress . LBS.fromStrict <$> runConduit (
