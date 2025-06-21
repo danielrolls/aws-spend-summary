@@ -1,9 +1,11 @@
 # AWS Spend Summary Tool
 
-[![Hackage](https://img.shields.io/badge/hackage-awsspendsummary-brightgreen.svg)](http://hackage.haskell.org/package/awsspendsummary)
 [![Packaging status](https://repology.org/badge/vertical-allrepos/aws-spend-summary.svg?columns=4&header=AWS%20Spend%20Summary)](https://repology.org/project/aws-spend-summary/versions)
 
 A command-line tool that displays your recent daily AWS cost usage without needing to log into the AWS console. This tool reads from AWS Cost and Usage Reports stored in S3, which is significantly more cost-effective than using the AWS Cost Explorer API.
+
+![Example usage of aws-spend-summary](images/shell-screenshot-redacted.png)
+
 
 ## Features
 
@@ -35,8 +37,6 @@ nix run nixpkgs#aws-spend-summary
 ```bash
 aws-spend-summary my-cost-reports reports/monthly my-cost-report --threshold 2.00
 ```
-
-![Example usage of aws-spend-summary](images/shell-screenshot-redacted.png)
 
 ## Setup Guide
 
@@ -174,10 +174,10 @@ nix run nixpkgs#aws-spend-summary -- my-costs reports/daily cost-analysis --thre
 ### Common Issues
 
 
-"Unable to read access key from AWS_ACCESS_KEY_ID (or AWS_ACCESS_KEY"
+**"Unable to read access key from AWS_ACCESS_KEY_ID (or AWS_ACCESS_KEY"**
 - Check that you have configured AWS credentials following the instructions above
 
-"Got 404 when trying to retrieve results..."
+**"Got 404 when trying to retrieve results..."**
 - S3 Bucket name may be incorrect
 - Bucket path may be incorrect
 - Cost report name may be incorrect
@@ -208,6 +208,9 @@ Using Cost and Usage Reports stored in S3 instead of the Cost Explorer API provi
 ## Contributing
 
 Contributions are welcome! Please feel free to submit pull requests or open issues.
+
+[![Hackage package](https://repology.org/badge/version-for-repo/hackage/haskell%3Aaws-spend-summary.svg)](https://repology.org/project/haskell%3Aaws-spend-summary/versions)
+
 
 ## License
 
