@@ -36,7 +36,7 @@ nix run nixpkgs#aws-spend-summary
 aws-spend-summary my-cost-reports reports/monthly my-cost-report --threshold 2.00
 ```
 
-![Example usage of aws-spend-summary](shell-screenshot-redacted.png)
+![Example usage of aws-spend-summary](images/shell-screenshot-redacted.png)
 
 ## Setup Guide
 
