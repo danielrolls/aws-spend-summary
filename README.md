@@ -205,6 +205,32 @@ Using Cost and Usage Reports stored in S3 instead of the Cost Explorer API provi
 - **Data consolidation**: Automatically merges multiple report files from S3, saving you from manually downloading and combining CSV files
 - **Analysis-ready**: CSV export makes it easy to import into Excel, Google Sheets, or data analysis tools
 
+## 💰 Why Use This Instead of Cost Explorer API?
+
+### 💰 Real-World Cost Savings
+
+Monitoring your AWS costs shouldn't cost more than your actual AWS usage! Here's what you roughly save (depends on the region and prices might change):
+
+| Monitoring Pattern | Cost Explorer API | aws-spend-summary | You Save |
+|-------------------|-------------------|-------------------|----------|
+| Once daily | $0.30/month | < $0.01/month | 97% |
+| Hourly (business hours) | $1.76/month | < $0.08/month | 95% |
+| Every 30 min (business) | $3.52/month | < $0.15/month | 96% |
+| Every hour (24/7) | $5.28/month | < $0.22/month | 96% |
+
+For a developer checking costs hourly during work hours, that's **$20+ saved per year** - enough for a nice dinner or a few months of a streaming subscription!
+
+### Additional Benefits
+- ✅ **No API rate limits** - Check as often as you want
+- ✅ **More detailed data** - Access individual line items
+- ✅ **Bulk operations** - Analyze multiple days without multiple API calls
+
+### Perfect For
+- 🎓 Students learning AWS
+- 👨‍💻 Developers with personal projects
+- 🚀 Bootstrapped startups watching every penny
+- 🧪 Anyone using AWS free tier who wants to stay within limits
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit pull requests or open issues.
